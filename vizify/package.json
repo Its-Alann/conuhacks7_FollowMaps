@@ -17,7 +17,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "type": "modules",
+  "type": "module",
   "eslintConfig": {
     "extends": [
       "react-app",
