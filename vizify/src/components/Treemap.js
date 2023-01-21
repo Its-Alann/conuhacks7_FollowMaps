@@ -11,57 +11,17 @@ class Treemap extends Component {
           {
             data: [
               {
-                x: 'New Delhi',
-                y: 218
+                x: 'Pop',
+                y: 500
               },
               {
-                x: 'Kolkata',
-                y: 149
+                x: 'Rap',
+                y: 200
               },
               {
-                x: 'Mumbai',
-                y: 184
+                x: 'Country',
+                y: 20
               },
-              {
-                x: 'Ahmedabad',
-                y: 55
-              },
-              {
-                x: 'Bangaluru',
-                y: 84
-              },
-              {
-                x: 'Pune',
-                y: 31
-              },
-              {
-                x: 'Chennai',
-                y: 70
-              },
-              {
-                x: 'Jaipur',
-                y: 30
-              },
-              {
-                x: 'Surat',
-                y: 44
-              },
-              {
-                x: 'Hyderabad',
-                y: 68
-              },
-              {
-                x: 'Lucknow',
-                y: 28
-              },
-              {
-                x: 'Indore',
-                y: 19
-              },
-              {
-                x: 'Kanpur',
-                y: 29
-              }
             ]
           }
         ],
@@ -70,7 +30,7 @@ class Treemap extends Component {
             show: false
           },
           chart: {
-            height: 350,
+            height: 500,
             type: 'treemap'
           },
           title: {
@@ -110,7 +70,7 @@ class Treemap extends Component {
               options={this.state.options}
               series={this.state.series}
               type="treemap"
-              width="500"
+              width="1000"
             />
           </div>
         </div>
