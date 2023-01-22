@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
 
-class Treemap extends Component {
+class TreemapSongs extends Component {
   constructor(props) {
     super(props);
-
-    const artistNameData = this.props.data[0]
-    const fileData = this.props.data[1]
-    // console.log(artistNameData);
+    const artistNameData = this.props.data.map((item) => item["Song Name"])
+    const position = this.props.data.map((item) => item["Total Streams"])
+    console.log(artistNameData);
     // console.log(fileData);
     const mapper = artistNameData.map((artist, index) => {
         return {
             x: artist + "",
-            y: fileData[index]
+            y: position[index]
         }
     });
 
@@ -31,7 +30,7 @@ class Treemap extends Component {
           type: "treemap"
         },
         title: {
-          text: "VIZIFY - Top Artists",
+          text: "VIZIFY - Songs by DRAKE",
           align: "center"
         },
         colors: [
@@ -76,4 +75,4 @@ class Treemap extends Component {
   }
 }
 
-export default Treemap;
+export default TreemapSongs;
