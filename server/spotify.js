@@ -1,10 +1,5 @@
-import express from 'express';
-const app = express();
-
-import SpotifyWebApi from 'spotify-web-api-node';
-import dotenv from 'dotenv'
-// require('dotenv').config();
-dotenv.config()
+const SpotifyWebApi = require('spotify-web-api-node');
+require('dotenv').config();
 
 const getTrackInfo = async (spotifyApi, title, artist) => {
   const queryString = `track:${title} artist:${artist}`;
@@ -76,21 +71,5 @@ const getAllTrackInfo = async (songs) => {
   return await songLoop();
 };
 
-import bodyParser from 'body-parser';
-app.use(bodyParser.json());
-
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
-
-app.listen(3000, () => {
-  console.log('Server listening on port 3000');
-});
-
-app.get('/getAllTrackInfo', async (req, res) => {
-  const songs = req.body.songs;
-
-  const jazzykins = await getAllTrackInfo(songs)
-
-  res.status(200).json(jazzykins);
-});
+export default getAllTrackInfo;
+// module.exports = getAllTrackInfo;
