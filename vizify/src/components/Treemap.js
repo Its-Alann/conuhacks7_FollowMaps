@@ -6,17 +6,16 @@ class Treemap extends Component {
   constructor(props) {
     super(props);
 
-    const fileData = this.props.data
-    const mapper = fileData.map(data => {return {
-        x: "BLABALBA",
-        y: data
-    }})
-
     this.state = {
           
         series: [
           {
-            data: mapper
+            data: [
+              {
+                x: 'BLABLA',
+                y: 500
+              },
+            ]
           }
         ],
         options: {
