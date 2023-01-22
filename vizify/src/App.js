@@ -7,7 +7,7 @@ import Genre from './components/Genre';
 function App() {
   return (
     <div>
-      {/* <Artists/> */}
+      <Artists/>
       <Genre />
     </div>
   );

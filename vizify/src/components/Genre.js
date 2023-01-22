@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Treemap from "./Treemap";
 import Papa from "papaparse";
 
+const getAllTrackInfo = require("../spotify")
+
 function Genre() {
   const [data, setData] = useState([]);
 
