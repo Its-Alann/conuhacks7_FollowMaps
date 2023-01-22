@@ -1,15 +1,7 @@
-import SpotifyWebApi from 'spotify-web-api-node';
-import dotenv from 'dotenv';
-
-// const SpotifyWebApi = require('spotify-web-api-node');
-// require('dotenv').config();
-
-dotenv.config();
+const SpotifyWebApi = require('spotify-web-api-node');
+require('dotenv').config();
 
 const getTrackInfo = async (spotifyApi, title, artist) => {
-  ///////////////////////////////////////
-
-  //////////////////////////////////////
   const queryString = `track:${title} artist:${artist}`;
 
   const response = await spotifyApi.searchTracks(queryString);
@@ -79,4 +71,5 @@ const getAllTrackInfo = async (songs) => {
   return await songLoop();
 };
 
-export default getAllTrackInfo;
+// export default getAllTrackInfo;
+module.exports = getAllTrackInfo;
