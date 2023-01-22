@@ -63,7 +63,7 @@ class Treemap extends Component {
               options={this.state.options}
               series={this.state.series}
               type="treemap"
-              width="1000"
+              width="1300"
             />
           </div>
         </div>
