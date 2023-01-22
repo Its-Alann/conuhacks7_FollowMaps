@@ -1,6 +1,6 @@
 import express from 'express';
-const app = express();
-
+import bodyParser from 'body-parser';
+import cors from 'cors'
 import SpotifyWebApi from 'spotify-web-api-node';
 import dotenv from 'dotenv'
 // require('dotenv').config();
@@ -45,6 +45,8 @@ const getTrackInfo = async (spotifyApi, title, artist) => {
 };
 
 const getAllTrackInfo = async (songs) => {
+  console.log(process.env.CLIENT_ID)
+
   const spotifyApi = new SpotifyWebApi({
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET
@@ -76,15 +78,18 @@ const getAllTrackInfo = async (songs) => {
   return await songLoop();
 };
 
-import bodyParser from 'body-parser';
-app.use(bodyParser.json());
+const app = express();
 
+app.use(cors())
+app.use(bodyParser.json());
 app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
-app.listen(3000, () => {
-  console.log('Server listening on port 3000');
+const port = 5000
+
+app.listen(port, () => {
+  console.log('Server listening on port ' + port);
 });
 
 app.post('/getAllTrackInfo', async (req, res) => {
