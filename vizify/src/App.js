@@ -7,8 +7,8 @@ import Genre from './components/Genre';
 function App() {
   return (
     <div>
-      <Artists/>
-      {/* <Genre/> */}
+      {/* <Artists/> */}
+      <Genre/>
     </div>
   );
 }
