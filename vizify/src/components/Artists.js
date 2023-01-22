@@ -5,6 +5,7 @@ import Treemap from './Treemap';
 const Artists = () => {
   const [file, setFile] = useState(null);
   const [fileData, setFileData] = useState([]);
+  const [artistName, setArtistName] = useState([]);
 
   const handleFileSelect = (e) => {
     setFile(e.target.files[0])
@@ -22,7 +23,8 @@ const Artists = () => {
                 }
             });
         });
-        setFileData(results.data.map(item => item['Top 10 (xTimes)']));
+        setFileData(results.data.map(item => item['Total Streams']));
+        setArtistName(results.data.map(item => item['Artist Name']));
     };
     reader.readAsText(file);
   }
@@ -31,7 +33,7 @@ const Artists = () => {
     <>
       <input type="file" onChange={handleFileSelect} />
       <button onClick={handleParse}>Parse CSV</button>
-      {fileData.length ? <Treemap data={fileData} /> : <p>Loading Data</p>}
+      {fileData.length ? <Treemap data={[fileData,artistName]} /> : <p>Loading Data</p>}
     </>
   );
 }
