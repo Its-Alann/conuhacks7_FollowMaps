@@ -6,7 +6,7 @@ const Genre = () => {
 const [data, setData] = useState([]);
 
   useEffect(() => {
-    Papa.parse('/top50_Spotify_final_data.csv', {
+    Papa.parse('/top1000_Spotify_final_data.csv', {
         header: true,
         download: true,
         complete: (results) => {
