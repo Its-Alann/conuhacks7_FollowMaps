@@ -30,23 +30,23 @@ class TreemapSongs extends Component {
           type: "treemap"
         },
         title: {
-          text: "VIZIFY - Songs by DRAKE",
+          text: "VIZIFY - Total streams",
           align: "center"
         },
         colors: [
-          "#3B93A5",
-          "#F7B844",
-          "#ADD8C7",
-          "#EC3C65",
-          "#CDD7B6",
-          "#C1F666",
-          "#D43F97",
-          "#1E5D8C",
-          "#421243",
+          "#b30000",
+          "#7c1158",
+          "#4421af",
+          "#1a53ff",
+          "#0d88e6",
+          "#00b7c7",
+          "#5ad45a",
+          "#8be04e",
+          "#ebdc78",
           "#7F94B0",
-          "#EF6537",
-          "#C0ADDB"
-        ],
+          "#2e2b28",
+          "#0040ff"
+        ], 
         plotOptions: {
           treemap: {
             distributed: true,
@@ -66,7 +66,7 @@ class TreemapSongs extends Component {
               options={this.state.options}
               series={this.state.series}
               type="treemap"
-              width="1300"
+              width="2600px"
             />
           </div>
         </div>
