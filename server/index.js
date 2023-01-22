@@ -87,7 +87,7 @@ app.listen(3000, () => {
   console.log('Server listening on port 3000');
 });
 
-app.get('/getAllTrackInfo', async (req, res) => {
+app.post('/getAllTrackInfo', async (req, res) => {
   const songs = req.body.songs;
 
   const jazzykins = await getAllTrackInfo(songs)
