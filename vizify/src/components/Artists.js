@@ -4,21 +4,25 @@ import Treemap from './Treemap';
 
 const Artists = () => {
   const [file, setFile] = useState(null);
+  const [fileData, setFileData] = useState([]);
 
   const handleFileSelect = (e) => {
     setFile(e.target.files[0])
   }
 
-  const handleParse = () => {
+  const handleParse = async () => {
     const reader = new FileReader();
-    reader.onload = (event) => {
-      const fileContent = event.target.result;
-      Papa.parse(fileContent, {
-        header: true,
-        complete: (results) => {
-          console.log(results.data.map(item => item['Top 10 (xTimes)']));
-        }
-      });
+    reader.onload = async (event) => {
+        const fileContent = event.target.result;
+        const results = await new Promise((resolve) => {
+            Papa.parse(fileContent, {
+                header: true,
+                complete: (results) => {
+                    resolve(results);
+                }
+            });
+        });
+        setFileData(results.data.map(item => item['Top 10 (xTimes)']));
     };
     reader.readAsText(file);
   }
@@ -27,7 +31,7 @@ const Artists = () => {
     <>
       <input type="file" onChange={handleFileSelect} />
       <button onClick={handleParse}>Parse CSV</button>
-      <Treemap/>
+      {fileData.length ? <Treemap data={fileData} /> : <p>Loading Data</p>}
     </>
   );
 }
