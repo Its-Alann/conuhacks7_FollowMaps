@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
+import Artists from "./Artists";
 
 class Treemap extends Component {
   constructor(props) {
@@ -11,16 +12,8 @@ class Treemap extends Component {
           {
             data: [
               {
-                x: 'Pop',
+                x: 'BLABLA',
                 y: 500
-              },
-              {
-                x: 'Rap',
-                y: 200
-              },
-              {
-                x: 'Country',
-                y: 20
               },
             ]
           }
@@ -62,8 +55,8 @@ class Treemap extends Component {
   }
 
   render() {
-    return (
-      <div className="app">
+      return (
+          <div className="app">
         <div className="row">
           <div className="mixed-chart">
             <Chart

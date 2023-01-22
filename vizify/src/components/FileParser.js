@@ -1,32 +1,25 @@
-import React, {useState} from 'react'
-import Papa from 'papaparse'
-const FileParser = () => {
-    const [file, setFile] = useState(null);
+import React, { Component } from 'react';
 
-    const handleFileSelect = (e) => {
-      setFile(e.target.files[0])
-    }
-  
-    const handleParse = () => {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const fileContent = event.target.result;
-        Papa.parse(fileContent, {
-          header: true,
-          complete: (results) => {
-            console.log(results.data);
-          }
-        });
-      };
-      reader.readAsText(file);
-    }
-  
+class MyComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { data: {} };
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:3000")
+      .then(response => response.json())
+      .then(data => this.setState({ data }));
+
+  }
+
+  render() {
     return (
-      <>
-        <input type="file" onChange={handleFileSelect} />
-        <button onClick={handleParse}>Parse CSV</button>
-      </>
+      <div>
+        {/* Render the data here */}
+      </div>
     );
+  }
 }
 
-export default FileParser
+export default MyComponent;
