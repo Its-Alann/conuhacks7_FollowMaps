@@ -4,10 +4,9 @@ import Chart from "react-apexcharts";
 class Treemap extends Component {
   constructor(props) {
     super(props);
-    const artistNameData = this.props.data[0]
+
+    const artistNameData = this.props.data
     const fileData = this.props.data[1]
-    console.log(artistNameData);
-    console.log(fileData);
     const mapper = artistNameData.map((artist, index) => {
         return {
             x: artist + "",

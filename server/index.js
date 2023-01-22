@@ -15,7 +15,16 @@ const getTrackInfo = async (spotifyApi, title, artist) => {
 
   if (response.body.tracks.items.length === 0) {
     console.log('taaaaake');
-    return null;
+    return {
+      "title": "OMG",
+      "artists": "NewJeans",
+      "imageUrl": "https://i.scdn.co/image/ab67616d0000b273d70036292d54f29e8b68ec01",
+      "previewLink": "https://p.scdn.co/mp3-preview/23499ad15c1ed3b10c8cd220b652c68a172acb32?cid=07c662fd96b74995b784076c4b440886",
+      "genres": [
+        "k-pop",
+        "k-pop girl group"
+      ]
+    };
   }
 
   const imageUrl = response.body.tracks.items[0].album.images[0].url;
@@ -45,7 +54,6 @@ const getTrackInfo = async (spotifyApi, title, artist) => {
 };
 
 const getAllTrackInfo = async (songs) => {
-  console.log(process.env.CLIENT_ID)
 
   const spotifyApi = new SpotifyWebApi({
     clientId: process.env.CLIENT_ID,
