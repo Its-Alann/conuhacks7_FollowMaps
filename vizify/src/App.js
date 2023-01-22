@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
       {/* <Artists/> */}
-      <Genre/>
+      <Genre />
     </div>
   );
 }
