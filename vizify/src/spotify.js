@@ -43,7 +43,7 @@ const getTrackInfo = async (spotifyApi, title, artist) => {
     previewLink: previewLink,
     genres: genres
   };
-  // console.log(res);
+
   return res;
 };
 
@@ -63,45 +63,28 @@ const getAllTrackInfo = async (songs) => {
   } catch (err) {
     console.log('Something went wrong when retrieving an access token', err);
   }
-  const antinos = async () => {
-    for (const song of songs) {
-      const info = await getTrackInfo(
-        spotifyApi,
-        song['title'],
-        song['artist']
-      );
-      console.log(info);
+
+  const infos = songs.map((song) =>
+    getTrackInfo(spotifyApi, song['title'], song['artist'])
+  );
+
+  const songLoop = async () => {
+    const res = [];
+    for await (const info of infos) {
+      res.push(info);
     }
+    return res;
   };
 
-  await antinos();
-
-  // spotifyApi.clientCredentialsGrant().then(
-  //   async function (data) {
-  //     console.log('The access token expires in ' + data.body['expires_in']);
-  //     console.log('The access token is ' + data.body['access_token']);
-
-  //     // Save the access token so that it's used in future calls
-  //     spotifyApi.setAccessToken(data.body['access_token']);
-  //   },
-  //   function (err) {
-  //     console.log('Something went wrong when retrieving an access token', err);
-  //   }
-  // );
-  // .then(() => {
-  //   const res = Promise.all(
-  //     arr.map(async (song) => {
-  //       return await getTrackInfo(spotifyApi, song['title'], song['artist']);
-  //     })
-  //   );
-  //   console.log(res);
-  //   return res;
-  // });
+  return await songLoop();
 };
 
-const songs = [
-  { title: 'walk it talk it', artist: 'migos' },
-  { title: 'omg', artist: 'newjeans' }
-];
+// const songs = [
+//   { title: 'walk it talk it', artist: 'migos' },
+//   { title: 'omg', artist: 'newjeans' },
+//   { title: '505', artist: 'arctic monkeys' }
+// ];
 
-getAllTrackInfo(songs);
+// console.log(await getAllTrackInfo(songs));
+
+export default getAllTrackInfo;
