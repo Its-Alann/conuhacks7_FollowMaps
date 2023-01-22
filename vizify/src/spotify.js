@@ -23,8 +23,8 @@ spotifyApi.clientCredentialsGrant().then(
     const response = await spotifyApi.searchTracks(
       "artist:Drake track:BackOutsideBoyz"
     );
-    console.log(response.body.tracks.items[0].preview_url);
-    console.log(response.body.tracks.items[0].album.images[0].url);
+    // console.log(response.body.tracks.items[0].preview_url);
+    // console.log(response.body.tracks.items[0].album.images[0].url);
       
     const artists = response.body.tracks.items[0].album.artists;
     console.log(artists)
