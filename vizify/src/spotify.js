@@ -1,9 +1,15 @@
 import SpotifyWebApi from 'spotify-web-api-node';
 import dotenv from 'dotenv';
 
+// const SpotifyWebApi = require('spotify-web-api-node');
+// require('dotenv').config();
+
 dotenv.config();
 
 const getTrackInfo = async (spotifyApi, title, artist) => {
+  ///////////////////////////////////////
+
+  //////////////////////////////////////
   const queryString = `track:${title} artist:${artist}`;
 
   const response = await spotifyApi.searchTracks(queryString);
@@ -41,38 +47,56 @@ const getTrackInfo = async (spotifyApi, title, artist) => {
   return res;
 };
 
-const getAllTrackInfo = (arr) => {
+const getAllTrackInfo = async (songs) => {
   const spotifyApi = new SpotifyWebApi({
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET
   });
 
-  spotifyApi
-    .clientCredentialsGrant()
-    .then(
-      async function (data) {
-        console.log('The access token expires in ' + data.body['expires_in']);
-        console.log('The access token is ' + data.body['access_token']);
+  try {
+    const tokenData = await spotifyApi.clientCredentialsGrant();
+    console.log('The access token expires in ' + tokenData.body['expires_in']);
+    console.log('The access token is ' + tokenData.body['access_token']);
 
-        // Save the access token so that it's used in future calls
-        spotifyApi.setAccessToken(data.body['access_token']);
-      },
-      function (err) {
-        console.log(
-          'Something went wrong when retrieving an access token',
-          err
-        );
-      }
-    )
-    .then(() => {
-      const res = Promise.all(
-        arr.map(async (song) => {
-          return await getTrackInfo(spotifyApi, song['title'], song['artist']);
-        })
+    // Save the access token so that it's used in future calls
+    spotifyApi.setAccessToken(tokenData.body['access_token']);
+  } catch (err) {
+    console.log('Something went wrong when retrieving an access token', err);
+  }
+  const antinos = async () => {
+    for (const song of songs) {
+      const info = await getTrackInfo(
+        spotifyApi,
+        song['title'],
+        song['artist']
       );
-      console.log(res);
-      return res;
-    });
+      console.log(info);
+    }
+  };
+
+  await antinos();
+
+  // spotifyApi.clientCredentialsGrant().then(
+  //   async function (data) {
+  //     console.log('The access token expires in ' + data.body['expires_in']);
+  //     console.log('The access token is ' + data.body['access_token']);
+
+  //     // Save the access token so that it's used in future calls
+  //     spotifyApi.setAccessToken(data.body['access_token']);
+  //   },
+  //   function (err) {
+  //     console.log('Something went wrong when retrieving an access token', err);
+  //   }
+  // );
+  // .then(() => {
+  //   const res = Promise.all(
+  //     arr.map(async (song) => {
+  //       return await getTrackInfo(spotifyApi, song['title'], song['artist']);
+  //     })
+  //   );
+  //   console.log(res);
+  //   return res;
+  // });
 };
 
 const songs = [
@@ -80,4 +104,4 @@ const songs = [
   { title: 'omg', artist: 'newjeans' }
 ];
 
-getAllTrackInfo(songs).then(console.log);
+getAllTrackInfo(songs);
