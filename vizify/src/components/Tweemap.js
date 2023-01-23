@@ -4,28 +4,42 @@ import Chart from "react-apexcharts";
 function Tweemap(props) {
   console.log("alan", props.data);
 
-  //   const artistNameData = props.data;
-  //   const fileData = props.data[1];
-  //   //   const mapper = artistNameData.map((info) => {
-  //   //     return {
-  //   //       x: info["artists"] + "",
-  //   //       y: 500,
-  //   //     };
-  //   //   });
+  const hmap = new Map();
 
+  props.data.forEach((item) => {
+    const artist = item["Artist Name"];
+    hmap.has(artist)
+      ? hmap.set(artist, hmap.get(artist) + 1)
+      : hmap.set(artist, 1);
+  });
+
+  const sortedMap = new Map([...hmap.entries()].sort((a, b) => b[1] - a[1]));
+
+  const artistName2 = Array.from(sortedMap.keys());
+  const count = Array.from(sortedMap.values());
+  console.log(sortedMap);
   const getMapper = (data) => {
     return data.map((info, index) => {
       //   console.log(info);
       return {
         x: info["artists"] + "",
-        y: 300,
+        y: 500,
       };
     });
   };
+  console.log(props.data["imageUrl"]);
   const [series, setSeries] = useState([{ data: getMapper(props.data) }]);
   const [options, setOptions] = useState({
     legend: {
       show: false,
+    },
+    fill: {
+      type: "image",
+      image: {
+        src: [props.data.map((el) => el.imageUrl)],
+        // width: undefined, // optional
+        // height: undefined, //optional
+      },
     },
     chart: {
       height: 500,
@@ -35,20 +49,6 @@ function Tweemap(props) {
       text: "Distibuted Treemap (different color for each cell)",
       align: "center",
     },
-    colors: [
-      "#3B93A5",
-      "#F7B844",
-      "#ADD8C7",
-      "#EC3C65",
-      "#CDD7B6",
-      "#C1F666",
-      "#D43F97",
-      "#1E5D8C",
-      "#421243",
-      "#7F94B0",
-      "#EF6537",
-      "#C0ADDB",
-    ],
     plotOptions: {
       treemap: {
         distributed: true,
